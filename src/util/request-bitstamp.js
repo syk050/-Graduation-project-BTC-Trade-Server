@@ -66,7 +66,7 @@ async function insert(data){
 
 
         pool.query('INSERT INTO price (time, open, high, low, close, volume) VALUES ?', [insertData])
-            .then(result => startWorker(result))
+            .then(result => startWorker(['ok']))
             .catch(err => console.log(`error: ${err}`));
 
     }catch(e){

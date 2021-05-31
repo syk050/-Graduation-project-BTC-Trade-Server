@@ -24,21 +24,17 @@ candlesCtrl.process10M = async function(req, res){
                             max(high) AS 'High', \
                             min(low) As 'Low'\
                         FROM bitcoin.price \
-                        GROUP BY SUBSTR(date_format(FROM_UNIXTIME(time), '%Y%m%d%H%i%S'), 1, 10), \
-                            FLOOR(SUBSTR(date_format(FROM_UNIXTIME(time), '%Y%m%d%H%i%S'), 11, 2) / 10) \
+                        GROUP BY floor(time / 600) \
                         order by time DESC \
-                        limit ?;";
+                        limit ?;"
     const searchResult = await pool.query(searchSql, limit);
-    console.log(typeof(searchResult[0][0]));
-    console.log(searchResult[0][0]);
 
     const closeSql = "SELECT close \
                         FROM bitcoin.price \
                         WHERE time IN ( \
                             SELECT MAX(time) \
                             FROM bitcoin.price \
-                            GROUP BY SUBSTR(date_format(FROM_UNIXTIME(time), '%Y%m%d%H%i%S'), 1, 10), \
-                            FLOOR(SUBSTR(date_format(FROM_UNIXTIME(time), '%Y%m%d%H%i%S'), 11, 2) / 10) \
+                            GROUP BY floor(time / 600) \
                         ) \
                         ORDER BY time DESC \
                         LIMIT ?;"
@@ -62,10 +58,9 @@ candlesCtrl.process1H = async function(req, res){
                             max(high) AS 'High', \
                             min(low) As 'Low'\
                         FROM bitcoin.price \
-                        GROUP BY SUBSTR(date_format(FROM_UNIXTIME(time), '%Y%m%d%H%i%S'), 1, 10), \
-                            FLOOR(SUBSTR(date_format(FROM_UNIXTIME(time), '%Y%m%d%H%i%S'), 11, 2) / 10) \
+                        GROUP BY floor(time / 3600) \
                         order by time DESC \
-                        limit ?;";
+                        limit ?;"
     const searchResult = await pool.query(searchSql, limit);
 
     const closeSql = "SELECT close \
@@ -73,8 +68,7 @@ candlesCtrl.process1H = async function(req, res){
                         WHERE time IN ( \
                             SELECT MAX(time) \
                             FROM bitcoin.price \
-                            GROUP BY SUBSTR(date_format(FROM_UNIXTIME(time), '%Y%m%d%H%i%S'), 1, 10), \
-                            FLOOR(SUBSTR(date_format(FROM_UNIXTIME(time), '%Y%m%d%H%i%S'), 11, 2) / 10) \
+                            GROUP BY floor(time / 3600) \
                         ) \
                         ORDER BY time DESC \
                         LIMIT ?;"
