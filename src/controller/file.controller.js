@@ -13,8 +13,8 @@ const { saveJsonToCSV } = require('../util/dataExports');
  */
 fileCtrl.fileRequest1M = async function(req, res){
     const uTime = parseInt(Date.now() / 1000);
-    const from = (uTime - (uTime % 60)) - (60*60);
-    const to = uTime - (uTime % 60);
+    const from = new Date((uTime - (uTime % 60)) - (60*60)).format("yyyy-MM-dd hh:mm:ss");
+    const to = new Date(uTime - (uTime % 60)).format("yyyy-MM-dd hh:mm:ss");
 
     const searchSql = 'SELECT * \
                         FROM ( \
@@ -37,8 +37,8 @@ fileCtrl.fileRequest1M = async function(req, res){
 
 fileCtrl.fileRequest10M = async function(req, res){
     const uTime = parseInt(Date.now() / 1000);
-    const from = (uTime - (uTime % 600)) - 600*5;
-    const to = uTime - (uTime % 600);
+    const from = new Date((uTime - (uTime % 60)) - (60*60)).format("yyyy-MM-dd hh:mm:ss");
+    const to = new Date(uTime - (uTime % 60)).format("yyyy-MM-dd hh:mm:ss");
 
     const searchSql = "SELECT time, \
                             open, \
@@ -76,8 +76,8 @@ fileCtrl.fileRequest10M = async function(req, res){
 
 fileCtrl.fileRequest1H = async function(req, res){
     const uTime = parseInt(Date.now() / 1000);
-    const from = (uTime - (uTime % 3600)) - 3600*23;
-    const to = uTime - (uTime % 3600);
+    const from = new Date((uTime - (uTime % 3600)) - 3600*23).format("yyyy-MM-dd hh:mm:ss");
+    const to = new Date(uTime - (uTime % 3600)).format("yyyy-MM-dd hh:mm:ss");
 
     const searchSql = "SELECT time, \
                         open, \

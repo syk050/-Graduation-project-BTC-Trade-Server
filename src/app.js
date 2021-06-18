@@ -15,6 +15,7 @@ app.set('view engine', 'ejs');
 app.use('/upload', require('./routes/upload.route'));
 app.use('/candles', require('./routes/candles.route'));
 app.use('/file', require('./routes/file.route'));
+app.use('/trade', require('./routes/trade.route'));
 
 
 const dir = './uploadedFiles';
