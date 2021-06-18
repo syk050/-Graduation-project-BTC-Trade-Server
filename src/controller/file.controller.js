@@ -27,10 +27,12 @@ fileCtrl.fileRequest1M = async function(req, res){
                         order by B.time;';
     const result = await pool.query(searchSql, [from, to]);
 
-    const fileName = `${from}-${to}-1m`;
-    saveJsonToCSV(result[0], fileName);
+    // const fileName = `${from}-${to}-1m`;
+    // saveJsonToCSV(result[0], fileName);
     // res.send(result[0])
-    res.redirect(`/${fileName}.csv`);
+    res.render('price-table', {
+        list: result[0]
+    });
 };
 
 fileCtrl.fileRequest10M = async function(req, res){
@@ -63,9 +65,12 @@ fileCtrl.fileRequest10M = async function(req, res){
         searchResult[0][i]['close'] = closeResult[0][i]['close'];
     }
 
-    const fileName = `${from}-${to}-10m`;
-    saveJsonToCSV(searchResult[0], fileName);
-    res.redirect(`/${fileName}.csv`);
+    // const fileName = `${from}-${to}-10m`;
+    // saveJsonToCSV(searchResult[0], fileName);
+    // res.redirect(`/${fileName}.csv`);
+    res.render('price-table', {
+        list: searchResult[0]
+    });
 };
 
 fileCtrl.fileRequest1H = async function(req, res){
@@ -85,7 +90,7 @@ fileCtrl.fileRequest1H = async function(req, res){
     const searchResult = await pool.query(searchSql, [from, to]);
 
     const closeSql = "SELECT close \
-                    FROM bitcoin.price \
+                    FROM price \
                     WHERE time IN ( \
                         SELECT MAX(time) \
                         FROM price \
@@ -98,10 +103,13 @@ fileCtrl.fileRequest1H = async function(req, res){
         searchResult[0][i]['close'] = closeResult[0][i]['close'];
     }
 
-    const fileName = `${from}-${to}-1h`;
-    saveJsonToCSV(searchResult[0], fileName);
-    // res.send(result[0])
-    res.redirect(`/${fileName}.csv`);
+    // const fileName = `${from}-${to}-1h`;
+    // saveJsonToCSV(searchResult[0], fileName);
+    // res.redirect(`/${fileName}.csv`);
+
+    res.render('price-table', {
+        list: searchResult[0]
+    });
 };
 
 module.exports = fileCtrl;

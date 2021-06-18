@@ -6,9 +6,10 @@ const { port } = require('./config');
 const app = express();
 
 // Settings
+app.set('port', port);
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.set('port', port);
 
 // Routes
 app.use('/upload', require('./routes/upload.route'));
