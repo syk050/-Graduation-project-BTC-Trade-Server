@@ -64,7 +64,7 @@ fileCtrl.fileRequest10M = async function(req, res){
                             sum(volume) As 'volume' \
                         FROM price \
                         WHERE time BETWEEN ? AND ? \
-                        GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 10);";
+                        GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 11);";
                         
     const searchResult = await pool.query(searchSql, [from, to]);
 
@@ -74,7 +74,7 @@ fileCtrl.fileRequest10M = async function(req, res){
                             SELECT MAX(time) \
                             FROM price \
                             WHERE time BETWEEN ? AND ? \
-                            GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 10) \
+                            GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 11) \
                         );";
     const closeResult = await pool.query(closeSql, [from, to]);
 
@@ -112,7 +112,7 @@ fileCtrl.fileRequest1H = async function(req, res){
                         sum(volume) As 'volume' \
                     FROM price \
                     WHERE time BETWEEN ? AND ? \
-                    GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 11);";
+                    GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 10);";
     const searchResult = await pool.query(searchSql, [from, to]);
 
     const closeSql = "SELECT close \
@@ -121,7 +121,7 @@ fileCtrl.fileRequest1H = async function(req, res){
                         SELECT MAX(time) \
                         FROM price \
                         WHERE time BETWEEN ? AND ? \
-                        GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 11) \
+                        GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 10) \
                     );";
     const closeResult = await pool.query(closeSql, [from, to]);
 

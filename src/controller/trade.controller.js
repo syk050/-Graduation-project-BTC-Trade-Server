@@ -53,7 +53,7 @@ tradeCtrl.tradeData10M = async function(req, res){
                             sum(total_amount) As 'total_amount' \
                         FROM trade \
                         WHERE time BETWEEN ? AND ? \
-                        GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 10);";
+                        GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 11);";
                         
     const searchResult = await pool.query(searchSql, [from, to]);
 
@@ -80,7 +80,7 @@ tradeCtrl.tradeData1H = async function(req, res){
                         sum(total_amount) As 'total_amount' \
                     FROM trade \
                     WHERE time BETWEEN ? AND ? \
-                    GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 11);";
+                    GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 10);";
     const searchResult = await pool.query(searchSql, [from, to]);
 
     res.render('trade-table', {
