@@ -26,7 +26,7 @@ fileCtrl.fileRequest1M = async function(req, res){
     const searchSql = 'SELECT * \
                         FROM ( \
                             SELECT * \
-                            FROM price \
+                            FROM test \
                             WHERE time BETWEEN ? AND ? \
                             ORDER BY time DESC \
                             limit 60 \
@@ -62,17 +62,17 @@ fileCtrl.fileRequest10M = async function(req, res){
                             min(low) As 'Low',\
                             close, \
                             sum(volume) As 'volume' \
-                        FROM price \
+                        FROM test \
                         WHERE time BETWEEN ? AND ? \
                         GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 11);";
                         
     const searchResult = await pool.query(searchSql, [from, to]);
 
     const closeSql = "SELECT close \
-                        FROM price \
+                        FROM test \
                         WHERE time IN ( \
                             SELECT MAX(time) \
-                            FROM price \
+                            FROM test \
                             WHERE time BETWEEN ? AND ? \
                             GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 11) \
                         );";
@@ -110,16 +110,16 @@ fileCtrl.fileRequest1H = async function(req, res){
                         min(low) As 'Low',\
                         close, \
                         sum(volume) As 'volume' \
-                    FROM price \
+                    FROM test \
                     WHERE time BETWEEN ? AND ? \
                     GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 10);";
     const searchResult = await pool.query(searchSql, [from, to]);
 
     const closeSql = "SELECT close \
-                    FROM price \
+                    FROM test \
                     WHERE time IN ( \
                         SELECT MAX(time) \
-                        FROM price \
+                        FROM test \
                         WHERE time BETWEEN ? AND ? \
                         GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 10) \
                     );";

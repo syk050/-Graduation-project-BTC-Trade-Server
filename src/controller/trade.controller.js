@@ -23,11 +23,11 @@ tradeCtrl.tradeData1M = async function(req, res){
                         FROM ( \
                             SELECT * \
                             FROM trade \
-                            WHERE time BETWEEN ? AND ? \
-                            ORDER BY time DESC \
+                            WHERE date BETWEEN ? AND ? \
+                            ORDER BY date DESC \
                             limit 60 \
                         ) As B \
-                        order by B.time;';
+                        order by B.date;';
     const result = await pool.query(searchSql, [from, to]);
 
     res.render('trade-table', {
@@ -47,13 +47,13 @@ tradeCtrl.tradeData10M = async function(req, res){
     const toTemp = new Date(toTimestamp).toISOString().split('T');
     const to = `${toTemp[0]} ${toTemp[1].slice(0,8)}`;
 
-    const searchSql = "SELECT time, \
+    const searchSql = "SELECT date, \
                             price, \
                             sum(amount) AS 'amount', \
                             sum(total_amount) As 'total_amount' \
                         FROM trade \
-                        WHERE time BETWEEN ? AND ? \
-                        GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 11);";
+                        WHERE date BETWEEN ? AND ? \
+                        GROUP BY SUBSTR(date_format(date, '%Y%m%d%H%i%S'), 1, 11);";
                         
     const searchResult = await pool.query(searchSql, [from, to]);
 
@@ -74,13 +74,13 @@ tradeCtrl.tradeData1H = async function(req, res){
     const toTemp = new Date(toTimestamp).toISOString().split('T');
     const to = `${toTemp[0]} ${toTemp[1].slice(0,8)}`;
 
-    const searchSql = "SELECT time, \
+    const searchSql = "SELECT date, \
                         price, \
                         sum(amount) AS 'amount', \
                         sum(total_amount) As 'total_amount' \
                     FROM trade \
-                    WHERE time BETWEEN ? AND ? \
-                    GROUP BY SUBSTR(date_format(time, '%Y%m%d%H%i%S'), 1, 10);";
+                    WHERE date BETWEEN ? AND ? \
+                    GROUP BY SUBSTR(date_format(date, '%Y%m%d%H%i%S'), 1, 10);";
     const searchResult = await pool.query(searchSql, [from, to]);
 
     res.render('trade-table', {

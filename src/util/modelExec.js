@@ -5,7 +5,7 @@ const path = require('path');
 
 
 modelExec.execute = () => {
-    filePath = path.join(__dirname, '/../py/code/test_prototype.py');
+    filePath = path.join(__dirname, '/../py/code/test_prototype_2.py');
     // filePath = path.join(__dirname, '/../py/spawnTest.py');
     // console.log(filePath);
 

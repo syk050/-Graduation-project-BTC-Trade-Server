@@ -27,6 +27,7 @@ async function insert(data){
             close: element['close'],
             volume: element['volume']
         };
+        console.log(temp);
         insertData.push(temp);
     });
     
