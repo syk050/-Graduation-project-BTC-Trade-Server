@@ -29,7 +29,7 @@ async function insert(data){
         };
 
         if (temp[volume] == 0){
-            console.log(`temp[volume]: ${temp[volume]}`);
+            console.log(`temp[volume]: ${temp['volume']}`);
             clearInterval(callAPI);
             setTimeout(callAPI, 10000);
             setInterval(callAPI, 60000);
