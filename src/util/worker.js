@@ -27,8 +27,16 @@ async function insert(data){
             close: element['close'],
             volume: element['volume']
         };
-        console.log(temp);
-        insertData.push(temp);
+
+        if (temp[volume] == 0){
+            console.log(`temp[volume]: ${temp[volume]}`);
+            clearInterval(callAPI);
+            setTimeout(callAPI, 10000);
+            setInterval(callAPI, 60000);
+        }else{
+            console.log(temp);
+            insertData.push(temp);
+        }
     });
     
     pool.query('INSERT INTO price SET ?', insertData[0])
