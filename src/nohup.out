@@ -1,0 +1,195 @@
+Server is in port 52274
+(node:12351) UnhandledPromiseRejectionWarning: Error: Access denied for user 'root'@'localhost'
+    at Packet.asError (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/packets/packet.js:712:17)
+    at ClientHandshake.execute (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/commands/command.js:28:26)
+    at PoolConnection.handlePacket (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/connection.js:425:32)
+    at PacketParser.onPacket (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/connection.js:75:12)
+    at PacketParser.executeStart (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/packet_parser.js:75:16)
+    at Socket.<anonymous> (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/connection.js:82:25)
+    at Socket.emit (events.js:400:28)
+    at addChunk (internal/streams/readable.js:293:12)
+    at readableAddChunk (internal/streams/readable.js:267:9)
+    at Socket.Readable.push (internal/streams/readable.js:206:10)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12351) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:12351) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+Error: Access denied for user 'root'@'localhost'
+    at PromisePool.query (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/promise.js:340:22)
+    at Object.reqBitstamp.selectLastOne (/home/ubuntu/web/bitcoin-server/src/util/request-bitstamp.js:9:10)
+    at Object.<anonymous> (/home/ubuntu/web/bitcoin-server/src/server.js:12:5)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12)
+    at internal/main/run_main_module.js:17:47 {
+  code: 'ER_ACCESS_DENIED_NO_PASSWORD_ERROR',
+  errno: 1698,
+  sqlState: '28000',
+  sqlMessage: "Access denied for user 'root'@'localhost'"
+}
+(node:12351) UnhandledPromiseRejectionWarning: Error: Access denied for user 'root'@'localhost'
+    at Packet.asError (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/packets/packet.js:712:17)
+    at ClientHandshake.execute (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/commands/command.js:28:26)
+    at PoolConnection.handlePacket (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/connection.js:425:32)
+    at PacketParser.onPacket (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/connection.js:75:12)
+    at PacketParser.executeStart (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/packet_parser.js:75:16)
+    at Socket.<anonymous> (/home/ubuntu/web/bitcoin-server/node_modules/mysql2/lib/connection.js:82:25)
+    at Socket.emit (events.js:400:28)
+    at addChunk (internal/streams/readable.js:293:12)
+    at readableAddChunk (internal/streams/readable.js:267:9)
+    at Socket.Readable.push (internal/streams/readable.js:206:10)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:12351) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:12351) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+WebSocket Client Connected
+timestamp: 1633938984, amount: 0.00172, type: 매수(0)
+timestamp: 1633939006, amount: 0.00070157, type: 매도(1)
+2021-10-11 07:56:00
+amount: 0.0010184299999999999,  total_amount: 0.00242157 
+
+error: Error: Access denied for user 'root'@'localhost'
+timestamp: 1633939025, amount: 0.10985823, type: 매도(1)
+timestamp: 1633939025, amount: 0.2025, type: 매도(1)
+timestamp: 1633939025, amount: 0.06859685, type: 매도(1)
+timestamp: 1633939025, amount: 0.01920315, type: 매도(1)
+timestamp: 1633939025, amount: 0.19178173, type: 매도(1)
+timestamp: 1633939025, amount: 0.00267836, type: 매수(0)
+timestamp: 1633939026, amount: 0.04, type: 매수(0)
+timestamp: 1633939030, amount: 0.08779444, type: 매도(1)
+timestamp: 1633939030, amount: 0.02211137, type: 매도(1)
+timestamp: 1633939030, amount: 0.18887351, type: 매도(1)
+timestamp: 1633939038, amount: 0.09111, type: 매도(1)
+timestamp: 1633939038, amount: 0.06, type: 매도(1)
+timestamp: 1633939038, amount: 0.44889, type: 매도(1)
+timestamp: 1633939047, amount: 0.00704566, type: 매도(1)
+timestamp: 1633939047, amount: 0.0680454, type: 매도(1)
+timestamp: 1633939055, amount: 0.08872964, type: 매도(1)
+timestamp: 1633939055, amount: 0.07509106, type: 매도(1)
+timestamp: 1633939073, amount: 0.0007, type: 매수(0)
+timestamp: 1633939078, amount: 0.01254, type: 매수(0)
+2021-10-11 07:57:00
+amount: -1.67371268,  total_amount: 1.7855493999999998 
+
+error: Error: Access denied for user 'root'@'localhost'
+timestamp: 1633939083, amount: 0.00859985, type: 매수(0)
+timestamp: 1633939093, amount: 0.00236, type: 매수(0)
+timestamp: 1633939095, amount: 0.00491, type: 매수(0)
+timestamp: 1633939100, amount: 0.00078, type: 매수(0)
+timestamp: 1633939111, amount: 0.04399779, type: 매수(0)
+timestamp: 1633939111, amount: 0.08600221, type: 매수(0)
+timestamp: 1633939113, amount: 0.02, type: 매도(1)
+timestamp: 1633939120, amount: 0.00351, type: 매수(0)
+Server is in port 52274
+Last Time: Mon Oct 11 2021 08:13:00 GMT+0000 (Coordinated Universal Time)
+WebSocket Client Connected
+Insert Time: Mon Oct 11 2021 08:14:00 GMT+0000 (Coordinated Universal Time)
+ok
+timestamp: 1633940211, amount: 0.43, type: 매도(1)
+timestamp: 1633940211, amount: 0.09, type: 매도(1)
+timestamp: 1633940212, amount: 0.25, type: 매도(1)
+timestamp: 1633940212, amount: 0.05, type: 매도(1)
+timestamp: 1633940212, amount: 0.06, type: 매도(1)
+timestamp: 1633940212, amount: 0.07, type: 매도(1)
+timestamp: 1633940212, amount: 0.09419754, type: 매도(1)
+timestamp: 1633940212, amount: 0.1, type: 매도(1)
+timestamp: 1633940212, amount: 0.06605, type: 매도(1)
+timestamp: 1633940213, amount: 0.20075246, type: 매도(1)
+timestamp: 1633940214, amount: 0.00069, type: 매수(0)
+timestamp: 1633940214, amount: 0.00262, type: 매수(0)
+timestamp: 1633940216, amount: 0.0054752, type: 매수(0)
+2021-10-11 08:17:00
+amount: -1.4022147999999999,  total_amount: 1.4197852000000002 
+
+timestamp: 1633940223, amount: 0.00343, type: 매수(0)
+timestamp: 1633940225, amount: 0.00491, type: 매수(0)
+timestamp: 1633940229, amount: 0.00401, type: 매수(0)
+timestamp: 1633940249, amount: 0.00053, type: 매수(0)
+timestamp: 1633940251, amount: 0.01372, type: 매수(0)
+timestamp: 1633940255, amount: 0.00766527, type: 매수(0)
+timestamp: 1633940262, amount: 0.15, type: 매수(0)
+timestamp: 1633940265, amount: 0.007, type: 매도(1)
+time: Mon Oct 11 2021 08:17:00 GMT+0000 (Coordinated Universal Time)
+{
+  time: '1633940220',
+  open: '56735.96',
+  high: '56745.62',
+  low: '56701.32',
+  close: '56701.32',
+  volume: '0.19126527'
+}
+timestamp: 1633940272, amount: 0.11018387, type: 매수(0)
+timestamp: 1633940274, amount: 0.07119819, type: 매도(1)
+2021-10-11 08:18:00
+amount: 0.21625095,  total_amount: 0.37264733 
+
+timestamp: 1633940301, amount: 0.00584021, type: 매수(0)
+timestamp: 1633940313, amount: 0.11447233, type: 매도(1)
+timestamp: 1633940321, amount: 0.0232, type: 매수(0)
+timestamp: 1633940328, amount: 0.029, type: 매도(1)
+timestamp: 1633940330, amount: 0.00292011, type: 매수(0)
+time: Mon Oct 11 2021 08:18:00 GMT+0000 (Coordinated Universal Time)
+{
+  time: '1633940280',
+  open: '56716.66',
+  high: '56716.87',
+  low: '56700.74',
+  close: '56706.49',
+  volume: '0.17543265'
+}
+timestamp: 1633940331, amount: 0.00074263, type: 매도(1)
+timestamp: 1633940331, amount: 0.00218, type: 매도(1)
+timestamp: 1633940333, amount: 0.0029201, type: 매수(0)
+timestamp: 1633940334, amount: 0.26431377, type: 매도(1)
+timestamp: 1633940334, amount: 0.04410286, type: 매도(1)
+timestamp: 1633940334, amount: 0.088, type: 매도(1)
+timestamp: 1633940334, amount: 0.11466869, type: 매도(1)
+timestamp: 1633940334, amount: 0.03542435, type: 매도(1)
+timestamp: 1633940334, amount: 0.03510151, type: 매수(0)
+timestamp: 1633940334, amount: 0.10999256, type: 매도(1)
+timestamp: 1633940334, amount: 0.2340091, type: 매도(1)
+timestamp: 1633940334, amount: 0.00038099, type: 매도(1)
+timestamp: 1633940334, amount: 0.03477834, type: 매도(1)
+timestamp: 1633940334, amount: 0.26465986, type: 매도(1)
+timestamp: 1633940334, amount: 0.14473142, type: 매도(1)
+timestamp: 1633940335, amount: 0.001, type: 매도(1)
+timestamp: 1633940335, amount: 0.00382935, type: 매도(1)
+timestamp: 1633940335, amount: 0.0125, type: 매도(1)
+timestamp: 1633940335, amount: 0.00163021, type: 매도(1)
+timestamp: 1633940336, amount: 0.00127213, type: 매도(1)
+timestamp: 1633940336, amount: 0.2, type: 매도(1)
+timestamp: 1633940337, amount: 0.03, type: 매수(0)
+timestamp: 1633940337, amount: 0.03, type: 매수(0)
+timestamp: 1633940340, amount: 0.00855, type: 매수(0)
+2021-10-11 08:19:00
+amount: -1.5631566599999998,  total_amount: 1.8402205200000001 
+
+timestamp: 1633940342, amount: 0.00053029, type: 매도(1)
+timestamp: 1633940342, amount: 0.00059, type: 매수(0)
+timestamp: 1633940342, amount: 0.2025, type: 매수(0)
+timestamp: 1633940342, amount: 0.11037441, type: 매수(0)
+timestamp: 1633940342, amount: 0.08265559, type: 매수(0)
+timestamp: 1633940343, amount: 0.02, type: 매수(0)
+timestamp: 1633940343, amount: 0.038, type: 매수(0)
+timestamp: 1633940343, amount: 0.112, type: 매수(0)
+timestamp: 1633940343, amount: 0.07697, type: 매수(0)
+timestamp: 1633940344, amount: 0.007, type: 매수(0)
+timestamp: 1633940345, amount: 0.00053029, type: 매도(1)
+timestamp: 1633940348, amount: 0.12, type: 매도(1)
+timestamp: 1633940348, amount: 0.05, type: 매도(1)
+timestamp: 1633940349, amount: 0.005, type: 매도(1)
+timestamp: 1633940349, amount: 0.00038097, type: 매도(1)
+timestamp: 1633940349, amount: 0.05461903, type: 매도(1)
+timestamp: 1633940351, amount: 0.00954, type: 매도(1)
+timestamp: 1633940351, amount: 0.00000541, type: 매도(1)
+timestamp: 1633940352, amount: 0.015, type: 매도(1)
+timestamp: 1633940352, amount: 0.00053082, type: 매도(1)
+timestamp: 1633940352, amount: 0.002, type: 매도(1)
+timestamp: 1633940352, amount: 0.0234, type: 매도(1)
+timestamp: 1633940353, amount: 0.0029201, type: 매수(0)
+timestamp: 1633940353, amount: 0.05, type: 매도(1)
+timestamp: 1633940353, amount: 0.00046017, type: 매도(1)
+timestamp: 1633940353, amount: 0.05, type: 매도(1)
+timestamp: 1633940353, amount: 0.00999999, type: 매도(1)
+timestamp: 1633940353, amount: 1e-8, type: 매도(1)
+timestamp: 1633940353, amount: 0.05046017, type: 매도(1)
