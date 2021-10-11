@@ -78,7 +78,7 @@ async function insert(data){
 function startWorker(result){
     console.log(result[0])
 
-    const worker = new Worker(__dirname + '/worker.js');
+    const worker = new Worker(__dirname + '/apiWorker.js');
 }
 
 module.exports = reqBitstamp;

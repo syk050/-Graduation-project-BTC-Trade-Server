@@ -24,6 +24,7 @@ client.on('connectFailed', function(error){
 });
 
 let amount = 0;
+let total_amount = 0;
 
 client.on('connect', function(connection){
     console.log('WebSocket Client Connected');
@@ -43,13 +44,12 @@ client.on('connect', function(connection){
         if(!isEmptyObject(data)){
             console.log(`timestamp: ${data['timestamp']}, amount: ${data['amount']}, type: ${data['type']?'매도':'매수'}(${data['type']})`);
 
-            if(data['type'] === 0){  //매수
-                amount += data['amount']
-            }else{  // 매도
+            if (data['type']) {  // 매도
                 amount -= data['amount'];
+            }else{  // 매수
+                amount += data['amount'];
             }
-
-            console.log(amount);
+            total_amount += data['amount'];
         }
     });
 
@@ -62,12 +62,29 @@ client.on('connect', function(connection){
 
 
 const { Worker } = require('worker_threads');
+const pool = require('../database');
+const worker = new Worker(__dirname + '/timecheck.js');
 
-const worker = new Worker('./trade/timecheck.js');
 
-worker.on('message', message => {
-    console.log(amount);
+worker.on('message', date => {
+    const day = date.toISOString().split('T')[0];
+    const time = date.toISOString().split('T')[1].slice(0, 8);
+    
+    console.log(`${day} ${time}`);
+    console.log(`amount: ${amount},  total_amount: ${total_amount} \n`);
+
+    const temp ={
+        date: day + ' ' + time,
+        price: 0,
+        amount: amount,
+        total_amount: total_amount
+    };
+
+    pool.query('INSERT INTO trade SET ?', temp)
+        .catch(err => console.log(`error: ${err}`));
+
     amount = 0;
+    total_amount = 0;
 });
 
 worker.on('exit', () => console.log('worker exit'));

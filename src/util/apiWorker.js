@@ -28,19 +28,21 @@ async function insert(data){
             volume: element['volume']
         };
 
-        if (temp[volume] == 0){
+        if (temp['volume'] == 0){
             console.log(`temp[volume]: ${temp['volume']}`);
-            clearInterval(callAPI);
+            clearInterval(interval);
             setTimeout(callAPI, 10000);
-            setInterval(callAPI, 60000);
+            interval = setInterval(callAPI, 60000);
         }else{
             console.log(temp);
             insertData.push(temp);
         }
     });
-    
-    pool.query('INSERT INTO price SET ?', insertData[0])
+
+    if(insertData.length != 0){
+        pool.query('INSERT INTO price SET ?', insertData[0])
         .catch(err => console.log(`error: ${err}`));
+    }
 }
 
-setInterval(callAPI, 60000);
+let interval = setInterval(callAPI, 60000);
