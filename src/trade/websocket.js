@@ -25,6 +25,7 @@ client.on('connectFailed', function(error){
 
 let amount = 0;
 let total_amount = 0;
+const price = new Array();
 
 client.on('connect', function(connection){
     console.log('WebSocket Client Connected');
@@ -50,6 +51,7 @@ client.on('connect', function(connection){
                 amount += data['amount'];
             }
             total_amount += data['amount'];
+            price.push(data['price']);
         }
     });
 
@@ -73,9 +75,11 @@ worker.on('message', date => {
     console.log(`${day} ${time}`);
     console.log(`amount: ${amount},  total_amount: ${total_amount} \n`);
 
+    const totalPrice = price.reduce((sum, num) => { return sum + num }, 0);
+    const avg = totalPrice / price.length;
     const temp ={
         date: day + ' ' + time,
-        price: 0,
+        price: avg,
         amount: amount,
         total_amount: total_amount
     };
