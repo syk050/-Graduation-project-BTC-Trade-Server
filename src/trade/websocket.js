@@ -78,6 +78,7 @@ worker.on('message', date => {
     const totalPrice = price.reduce((sum, num) => { return sum + num }, 0);
     const avg = totalPrice / price.length;
     const temp ={
+	time: date,
         date: day + ' ' + time,
         price: avg,
         amount: amount,
