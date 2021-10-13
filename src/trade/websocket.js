@@ -75,10 +75,12 @@ worker.on('message', date => {
     console.log(`${day} ${time}`);
     console.log(`amount: ${amount},  total_amount: ${total_amount} \n`);
 
+    const timestamp = date.getTime()/1000;
     const totalPrice = price.reduce((sum, num) => { return sum + num }, 0);
-    const avg = totalPrice / price.length;
+    const avg = price.length? totalPrice / price.length : 0;
+
     const temp ={
-	time: date,
+	    time: timestamp,
         date: day + ' ' + time,
         price: avg,
         amount: amount,
