@@ -11,7 +11,9 @@ candlesCtrl.process1M = async function(req, res){
     const searchSql = 'SELECT * FROM price ORDER BY time DESC LIMIT ?;';
     const result = await pool.query(searchSql, limit);
 
-    res.send(result[0]);
+    res.render('price-table', {
+        list: searchResult[0]
+    });
 };
 
 candlesCtrl.process10M = async function(req, res){
@@ -45,7 +47,9 @@ candlesCtrl.process10M = async function(req, res){
         searchResult[0][i]['close'] = closeResult[0][i]['close'];
     }
 
-    res.send(searchResult[0]);
+    res.render('price-table', {
+        list: searchResult[0]
+    });
 };
 
 candlesCtrl.process1H = async function(req, res){
@@ -79,7 +83,9 @@ candlesCtrl.process1H = async function(req, res){
         searchResult[0][i]['close'] = closeResult[0][i]['close'];
     }
 
-    res.send(searchResult[0]);
+    res.render('price-table', {
+        list: searchResult[0]
+    });
 };
 
 module.exports = candlesCtrl;
