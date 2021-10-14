@@ -12,7 +12,7 @@ candlesCtrl.process1M = async function(req, res){
     const result = await pool.query(searchSql, limit);
 
     res.render('price-table', {
-        list: searchResult[0]
+        list: result[0]
     });
 };
 
