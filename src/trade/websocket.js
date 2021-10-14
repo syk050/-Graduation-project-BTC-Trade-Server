@@ -83,7 +83,7 @@ worker.on('message', date => {
 	    time: timestamp,
         date: day + ' ' + time,
         price: avg,
-        amount: amount,
+        actual_amount: amount,
         total_amount: total_amount
     };
 
