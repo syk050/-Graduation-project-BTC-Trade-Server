@@ -1,10 +1,8 @@
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const express = require('express');
+const wsModule = require('ws');
 
-
-const Asset = require('./models/asset');
-const tradeLog = require('./models/trade-log');
 const { database } = require('./consfig')
 
 
@@ -28,41 +26,39 @@ app.use(bodyParser.json()); // json 형태로 받음
 app.use(bodyParser.urlencoded({extended:true})); // 3
 
 // Route
-app.get('/info', (req, res) => {
-  Asset.find({}, (err, contacts) => {
-    if (err) return res.json(err);
+app.use('/info', require('./routes/info.route'));
+app.use('/trade', require('./routes/trade.route'));
 
-    res.send(contacts);
-  });
-});
-
-app.post('/info', (req, res) => {
-  Asset.create(req.body, (err, contact) => {
-    if (err) return res.json(err);
-    res.redirect("/");
-  });
-});
-
-app.get('/trade', (req, res) => {
-  tradeLog.find({})
-    .sort('{timestamp: -1}')
-    .exec((err, logs) => {
-      if (err) return res.json(err);
-
-      res.send(logs);
-    });
-});
-
-app.post('/trade', (req, res) => {
-  tradeLog.create(req.body, (err, contact) => {
-    if (err) return res.json(err);
-    res.redirect("/");
-  });
-});
 
 // Port setting
 var port = 52276;
 app.listen(port, function(){
   console.log('server on! ' + port);
+});
+
+const webSocketServer = new wsModule.Server({
+  server: app,
+});
+
+webSocketServer.on('connection', (ws, req) => {
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log(`WS: ${ip} 접속`);
+
+  if (ws.readyState == ws.OPEN){
+      ws.send('ws-server 접속 완료');
+      console.log(`WS: ${ip} 접속 완료`);
+  }
+
+  ws.on('message', (msg) => {
+      console.log(`수신: \n${msg}`);
+  });
+
+  ws.on('error', err => {
+      console.error(err);
+  });
+
+  ws.on('close', () => {
+      console.log(`WS: ${ip} 연결해제`);
+  });
 });
 
