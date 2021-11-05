@@ -32,12 +32,12 @@ app.use('/trade', require('./routes/trade.route'));
 
 // Port setting
 var port = 52276;
-app.listen(port, function(){
-  console.log('server on! ' + port);
+const HTTPServer = app.listen(port, () => {
+  console.log('Sever is opren at port: ' + port);
 });
 
 const webSocketServer = new wsModule.Server({
-  server: app,
+  server: HTTPServer,
 });
 
 webSocketServer.on('connection', (ws, req) => {
