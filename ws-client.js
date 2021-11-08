@@ -76,25 +76,25 @@ webSocketServer.on('connection', (ws, req) => {
         });
 
         Asset.findOne({id: 1}).exec()
-        .then(instance => {
-          if (log['type'] == "매수") {
-            instance['availAble'] -= msg['amount'] + msg['fee'];
-            instance['totalAssets'] = instance['availAble'];
-            instance['quantity'] += msg['volume'];
-            instance['avgPrice'] = Math.round((instance['avgPrice'] + msg['price']) / instance['quantity'] * 100) / 100;
-          }
-          else if (log['type'] == "매도") {
-            instance['availAble'] += msg['amount'] - msg['fee'];
-            instance['totalAssets'] = instance['availAble'];
-            instance['quantity'] -= msg['volume'];
-          }
+          .then(instance => {
+            if (log['type'] == "매수") {
+              instance['availAble'] -= log['amount'] + log['fee'];
+              instance['totalAssets'] = instance['availAble'];
+              instance['quantity'] += log['volume'];
+              instance['avgPrice'] = Math.round((instance['avgPrice'] + log['price']) / instance['quantity'] * 100) / 100;
+            }
+            else if (log['type'] == "매도") {
+              instance['availAble'] += log['amount'] - log['fee'];
+              instance['totalAssets'] = instance['availAble'];
+              instance['quantity'] -= log['volume'];
+            }
 
-          return instance;
-        })
-        .then(instance => {
-          Asset.updateOne({id: 1}, instance).exec();
-        })
-        .catch(err => console.error(err));
+            return instance;
+          })
+          .then(instance => {
+            Asset.updateOne({id: 1}, instance).exec();
+          })
+          .catch(err => console.error(err));
       }
     }catch(err){
       console.log('ws-client err');
