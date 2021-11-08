@@ -76,15 +76,15 @@ webSocketServer.on('connection', (ws, req) => {
         });
       }
       
-      await Asset.findOne({id: 1})
+      Asset.findOne({id: 1}).exec()
         .then(instance => {
-          console.log(instance);
-          if (log['type'] == 0) instance['availAble'] -= msg['amount'];
+          if (log['type'] == 0) instance['availAble'] = instance['availAble'] - msg['amount'];
           else if (log['type'] == 1) instance['availAble'] += msg['amount'];
-          resolve(instance)
+          return instance;
         })
         .then(instance => {
-          Asset.updateOne({id: 1}, instance)
+	  console.log(instance)
+          Asset.updateOne({id: 1}, instance);
         })
         .catch(err => console.error(err));
         
