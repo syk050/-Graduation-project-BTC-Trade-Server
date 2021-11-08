@@ -70,21 +70,20 @@ webSocketServer.on('connection', (ws, req) => {
         throw "log['type'] err";
       }
       log['auto'] = false;
-      if (log['type'] == 0 || log['type'] == 1){
+      if (log['type'] == "매수" || log['type'] == "매도"){
         TradeLog.create(log, (err, contact) => {
           if (err) console.error(err);
         });
-      }
-      
-      Asset.findOne({id: 1}).exec()
+
+        Asset.findOne({id: 1}).exec()
         .then(instance => {
-          if (log['type'] == 0) {
+          if (log['type'] == "매수") {
             instance['availAble'] -= msg['amount'] + msg['fee'];
             instance['totalAssets'] = instance['availAble'];
             instance['quantity'] += msg['volume'];
             instance['avgPrice'] = Math.round((instance['avgPrice'] + msg['price']) / instance['quantity'] * 100) / 100;
           }
-          else if (log['type'] == 1) {
+          else if (log['type'] == "매도") {
             instance['availAble'] += msg['amount'] - msg['fee'];
             instance['totalAssets'] = instance['availAble'];
             instance['quantity'] -= msg['volume'];
@@ -96,7 +95,7 @@ webSocketServer.on('connection', (ws, req) => {
           Asset.updateOne({id: 1}, instance).exec();
         })
         .catch(err => console.error(err));
-        
+      }
     }catch(err){
       console.log('ws-client err');
       console.error(err);
