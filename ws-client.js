@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const express = require('express');
 const wsModule = require('ws');
 
-const { database } = require('./config')
+const { database } = require('./config');
+
+const Asset = require('./models/asset');
+const TradeLog = require('./models/trade-log');
 
 
 mongoose.connect(database);
@@ -52,16 +55,40 @@ webSocketServer.on('connection', (ws, req) => {
   ws.on('message', (msg) => {
     console.log(`수신: \n${msg}`);
 
+    
     try{
-      if (msg['type'] == 0){  // 매수
+      let log = JSON.parse(msg)
 
-      }else if(msg['type'] == 1){  // 매도
-  
-      }else if(msg['type'] == 2){   // 자동 매매
+      if (log['type'] == 0){  // 매수
+        log['type'] = "매수"
+      }else if(log['type'] == 1){  // 매도
+        log['type'] = "매도"
+      }else if(log['type'] == 2){   // 자동 매매
 
       }else{
-        throw "msg['type'] err";
+        throw "log['type'] err";
       }
+      TradeLog.create(log, (err, contact) => {
+        if (err) console.error(err);
+      });
+
+      Asset.findOne({id: 1}, (err, contact) => {
+        if (err) {
+          console.error('find err');
+          return;
+        }else{
+          if (log['type'] == 0) contact['availAble'] -= msg['amount'];
+          else if (log['type'] == 1) contact['availAble'] += msg['amount'];
+          else return;
+          
+          Asset.updateOne({id: 1}, contact, (err, contact) => {
+            if (err){
+              console.error('update err');
+              return;
+            }
+          });
+        }
+      });
     }catch(err){
       console.log('ws-client err');
       console.err(err);
