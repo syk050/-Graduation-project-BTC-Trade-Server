@@ -45,20 +45,36 @@ webSocketServer.on('connection', (ws, req) => {
   console.log(`WS: ${ip} 접속`);
 
   if (ws.readyState == ws.OPEN){
-      ws.send('ws-server 접속 완료');
-      console.log(`WS: ${ip} 접속 완료`);
+    ws.send('ws-server 접속 완료');
+    console.log(`WS: ${ip} 접속 완료`);
   }
 
   ws.on('message', (msg) => {
-      console.log(`수신: \n${msg}`);
+    console.log(`수신: \n${msg}`);
+
+    try{
+      if (msg['type'] == 0){  // 매수
+
+      }else if(msg['type'] == 1){  // 매도
+  
+      }else if(msg['type'] == 2){   // 자동 매매
+
+      }else{
+        throw "msg['type'] err";
+      }
+    }catch(err){
+      console.log('ws-client err');
+      console.err(err);
+    }
   });
 
   ws.on('error', err => {
-      console.error(err);
+    console.log('ws-client err');
+    console.error(err);
   });
 
   ws.on('close', () => {
-      console.log(`WS: ${ip} 연결해제`);
+    console.log(`WS: ${ip} 연결해제`);
   });
 });
 

@@ -11,10 +11,12 @@ infoCtrl.getInfo = async function(req, res){
 };
 
 infoCtrl.postInfo = async function(req, res){
-    Asset.create(req.body, (err, contact) => {
-        if (err) return res.json(err);
-        res.redirect("/info");
-    });
+    // Asset.create(req.body, (err, contact) => {
+    //     if (err) return res.json(err);
+    //     res.redirect("/info");
+    // });
+
+    res.redirect("/info");
 };
 
 module.exports = infoCtrl;

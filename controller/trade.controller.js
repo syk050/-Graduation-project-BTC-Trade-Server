@@ -12,11 +12,23 @@ tradeCtrl.getTrade = async function(req, res){
     });
 };
 
+// tradeCtrl.getTrade = async function(req, res){
+//     tradeLog.find({})
+//       .sort('{timestamp: -1}')
+//       .exec((err, logs) => {
+//         if (err) return res.json(err);
+  
+//         res.render('trade-log', {logs: logs});
+//     });
+// };
+
 tradeCtrl.postTrade = async function(req, res){
-    tradeLog.create(req.body, (err, contact) => {
-        if (err) return res.json(err);
-        res.redirect("/");
-    });
+    // tradeLog.create(req.body, (err, contact) => {
+    //     if (err) return res.json(err);
+    //     res.redirect("/");
+    // });
+
+    res.redirect("/");
 };
 
 module.exports = tradeCtrl;
