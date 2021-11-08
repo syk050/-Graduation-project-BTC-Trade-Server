@@ -14,6 +14,7 @@
                 <th>거래금액</th>
                 <th>수수료</th>
                 <th>정산금액</th>
+                <th>자동매매</th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
                     <td><%= log['amount'] %></td>
                     <td><%= log['fee'] %></td>
                     <td><%= log['settled'] %></td>
+                    <td><%= log['auto'] %></td>
                 </tr>
             <% }); %>
         </tbody>
