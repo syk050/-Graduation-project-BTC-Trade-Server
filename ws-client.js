@@ -43,6 +43,7 @@ const webSocketServer = new wsModule.Server({
   server: HTTPServer,
 });
 
+
 webSocketServer.on('connection', (ws, req) => {
   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log(`WS: ${ip} 접속`);
@@ -64,7 +65,7 @@ webSocketServer.on('connection', (ws, req) => {
       }else if(log['type'] == 1){  // 매도
         log['type'] = "매도"
       }else if(log['type'] == 2){   // 자동 매매
-
+        
       }else{
         throw "log['type'] err";
       }
@@ -91,7 +92,7 @@ webSocketServer.on('connection', (ws, req) => {
       });
     }catch(err){
       console.log('ws-client err');
-      console.err(err);
+      console.error(err);
     }
   });
 
@@ -105,3 +106,13 @@ webSocketServer.on('connection', (ws, req) => {
   });
 });
 
+
+const webSocketClient = new wsModule('URL');
+
+webSocketClient.on('connection', (ws) => {
+  ws.on('open', () => {
+    console.log('webSocketClient open');
+  });
+
+  
+});

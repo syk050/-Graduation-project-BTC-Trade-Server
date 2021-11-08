@@ -7,7 +7,8 @@ const tradeSchema = new mongoose.Schema({
     price: Number,
     amount: Number,
     fee: Number,
-    settled: Number
+    settled: Number,
+    auto: Boolean
 });
 
 
@@ -20,7 +21,8 @@ module.exports = mongoose.model('tradeLog', tradeSchema);
  * 거래단가     price: Number,
  * 거래금액     amount: Number,
  * 수수료       fee: Number,
- * 정산금액     settled: Number
+ * 정산금액     settled: Number,
+ * 자동매매     auto: Boolean
  */
 
 // {
@@ -30,4 +32,5 @@ module.exports = mongoose.model('tradeLog', tradeSchema);
 //     "amount": 4,
 //     "fee": 5,
 //     "settled": 6
+//     "auto": false
 // }
