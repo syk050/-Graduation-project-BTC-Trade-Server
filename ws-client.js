@@ -105,14 +105,3 @@ webSocketServer.on('connection', (ws, req) => {
     console.log(`WS: ${ip} 연결해제`);
   });
 });
-
-
-const webSocketClient = new wsModule('URL');
-
-webSocketClient.on('connection', (ws) => {
-  ws.on('open', () => {
-    console.log('webSocketClient open');
-  });
-
-  
-});
