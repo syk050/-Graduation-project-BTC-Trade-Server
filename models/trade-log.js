@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const tradeSchema = new mongoose.Schema({
-    timstamp: {type: Date, default: Date.now},
+    timestamp: {type: Date, default: Date.now},
     type: String,
     volume : Number,
     price: Number,
@@ -15,7 +15,7 @@ const tradeSchema = new mongoose.Schema({
 module.exports = mongoose.model('tradeLog', tradeSchema);
 
 /* 거래내역     
- * 체결시간     timstamp: {type: Date, default: Date.now},
+ * 체결시간     timestamp: {type: Date, default: Date.now},
  * 종류(매도매수)type: String,
  * 거래수량     volume : Number,
  * 거래단가     price: Number,
