@@ -78,13 +78,22 @@ webSocketServer.on('connection', (ws, req) => {
       
       Asset.findOne({id: 1}).exec()
         .then(instance => {
-          if (log['type'] == 0) instance['availAble'] = instance['availAble'] - msg['amount'];
-          else if (log['type'] == 1) instance['availAble'] += msg['amount'];
+          if (log['type'] == 0) {
+            instance['availAble'] -= msg['amount'] + msg['fee'];
+            instance['totalAssets'] = instance['availAble'];
+            instance['quantity'] += msg['volume'];
+            instance['avgPrice'] = Math.round((instance['avgPrice'] + msg['price']) / instance['quantity'] * 100) / 100;
+          }
+          else if (log['type'] == 1) {
+            instance['availAble'] += msg['amount'] - msg['fee'];
+            instance['totalAssets'] = instance['availAble'];
+            instance['quantity'] -= msg['volume'];
+          }
+
           return instance;
         })
         .then(instance => {
-	  console.log(instance)
-          Asset.updateOne({id: 1}, instance);
+          Asset.updateOne({id: 1}, instance).exec();
         })
         .catch(err => console.error(err));
         
