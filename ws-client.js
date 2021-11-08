@@ -69,6 +69,7 @@ webSocketServer.on('connection', (ws, req) => {
       }else{
         throw "log['type'] err";
       }
+      log['auto'] = false;
       TradeLog.create(log, (err, contact) => {
         if (err) console.error(err);
       });
