@@ -7,6 +7,7 @@ const { database } = require('./config');
 
 const Asset = require('./models/asset');
 const TradeLog = require('./models/trade-log');
+let isAuto = false;
 
 
 mongoose.connect(database);
@@ -31,6 +32,9 @@ app.use(bodyParser.urlencoded({extended:true})); // 3
 // Route
 app.use('/info', require('./routes/info.route'));
 app.use('/trade', require('./routes/trade.route'));
+app.use('/auto', (req, res) => {
+  return res.send({auto: isAuto});
+});
 
 
 // Port setting
@@ -65,7 +69,7 @@ webSocketServer.on('connection', (ws, req) => {
       }else if(log['type'] == 1){  // 매도
         log['type'] = "매도"
       }else if(log['type'] == 2){   // 자동 매매
-        
+        isAuto = isAuto? false:true;
       }else{
         throw "log['type'] err";
       }
