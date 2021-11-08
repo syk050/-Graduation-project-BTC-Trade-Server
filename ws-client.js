@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const wsModule = require('ws');
 
-const { database } = require('./consfig')
+const { database } = require('./config')
 
 
 mongoose.connect(database);
