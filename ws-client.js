@@ -92,6 +92,7 @@ webSocketServer.on('connection', (ws, req) => {
               instance['availAble'] += log['amount'] - log['fee'];
               instance['totalAssets'] = instance['availAble'];
               instance['quantity'] -= log['volume'];
+              if (instance['quantity'] == 0) instance['avgPrice'] = 0
             }
 
             return instance;
