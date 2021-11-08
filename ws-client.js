@@ -70,20 +70,25 @@ webSocketServer.on('connection', (ws, req) => {
         throw "log['type'] err";
       }
       log['auto'] = false;
-      TradeLog.create(log, (err, contact) => {
-        if (err) console.error(err);
-      });
-
-      Asset.findOne({id: 1}, (err, contact) => {
+      if (log['type'] == 0 || log['type'] == 1){
+        TradeLog.create(log, (err, contact) => {
+          if (err) console.error(err);
+        });
+      }
+      
+      Asset.findOne({id: 1}, (err, docs) => {
+        console.log('find');
+        console.log(docs);
         if (err) {
           console.error('find err');
           return;
         }else{
-          if (log['type'] == 0) contact['availAble'] -= msg['amount'];
-          else if (log['type'] == 1) contact['availAble'] += msg['amount'];
+          if (log['type'] == 0) docs['availAble'] -= msg['amount'];
+          else if (log['type'] == 1) docs['availAble'] += msg['amount'];
           else return;
           
-          Asset.updateOne({id: 1}, contact, (err, contact) => {
+          Asset.updateOne({id: 1}, docs, (err, contact) => {
+
             if (err){
               console.error('update err');
               return;
