@@ -76,26 +76,18 @@ webSocketServer.on('connection', (ws, req) => {
         });
       }
       
-      Asset.findOne({id: 1}, (err, docs) => {
-        console.log('find');
-        console.log(docs);
-        if (err) {
-          console.error('find err');
-          return;
-        }else{
-          if (log['type'] == 0) docs['availAble'] -= msg['amount'];
-          else if (log['type'] == 1) docs['availAble'] += msg['amount'];
-          else return;
-          
-          Asset.updateOne({id: 1}, docs, (err, contact) => {
-
-            if (err){
-              console.error('update err');
-              return;
-            }
-          });
-        }
-      });
+      await Asset.findOne({id: 1})
+        .then(instance => {
+          console.log(instance);
+          if (log['type'] == 0) instance['availAble'] -= msg['amount'];
+          else if (log['type'] == 1) instance['availAble'] += msg['amount'];
+          resolve(instance)
+        })
+        .then(instance => {
+          Asset.updateOne({id: 1}, instance)
+        })
+        .catch(err => console.error(err));
+        
     }catch(err){
       console.log('ws-client err');
       console.error(err);
