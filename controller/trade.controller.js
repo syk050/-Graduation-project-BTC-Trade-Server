@@ -14,7 +14,7 @@ const tradeLog = require('../models/trade-log');
 
 tradeCtrl.getTrade = async function(req, res){
     tradeLog.find({})
-      .sort('{timestamp: 1}')
+      .sort('{timestamp: -1}')
       .exec((err, logs) => {
         if (err) return res.json(err);
   
