@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const { getTrade, postTrade } = require('../controller/trade.controller');
+const { getAI, getTotal } = require('../controller/trade.controller');
 
 
-router.get('/', getTrade);
-router.post('/', postTrade);
+router.get('/AI', getAI);
+router.post('/Total', getTotal);
 
 
 
