@@ -81,7 +81,8 @@ webSocketServer.on('connection', (ws, req) => {
               instance['availAble'] -= log['amount'] + log['fee'];
               instance['totalAssets'] = instance['availAble'];
               instance['quantity'] += log['volume'];
-              instance['avgPrice'] = Math.round((instance['avgPrice'] + log['price']) / instance['quantity'] * 100) / 100;
+              if (instance['avgPrice'] == 0) instance['avgPrice'] = log['price'];
+              else instance['avgPrice'] = Math.round((instance['avgPrice'] + log['price']) / instance['quantity'] * 100) / 100;
             }
             else if (log['type'] == "매도") {
               instance['availAble'] += log['amount'] - log['fee'];
