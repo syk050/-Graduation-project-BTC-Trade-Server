@@ -81,6 +81,30 @@ webSocketServer.on('connection', (ws, req) => {
         log['type'] = "매도"
       }else if(log['type'] == 2){   // 자동 매매
         isAuto = isAuto? false:true;
+      }else if(log['type'] == 2){  // 입금
+        Asset.findOne({id: 1}).exec()
+          .then(instance => {
+            instance['availAble'] += log['amount'];
+            instance['totalAssets'] += log['amount'];
+            return instance;
+          })
+          .then(instance => {
+            Asset.updateOne({id: 1}, instance).exec();
+            return;
+          })
+          .catch(err => console.error(err));
+      }else if(log['type'] == 2){  // 출금
+        Asset.findOne({id: 1}).exec()
+          .then(instance => {
+            instance['availAble'] -= log['amount'];
+            instance['totalAssets'] -= log['amount'];
+            return instance;
+          })
+          .then(instance => {
+            Asset.updateOne({id: 1}, instance).exec();
+            return;
+          })
+          .catch(err => console.error(err));
       }else{
         throw "log['type'] err";
       }
