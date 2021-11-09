@@ -33,7 +33,9 @@ app.use(bodyParser.urlencoded({extended:true})); // 3
 app.use('/info', require('./routes/info.route'));
 app.use('/trade', require('./routes/trade.route'));
 app.use('/auto', (req, res) => {
-  return res.send({auto: isAuto});
+  let instance = await Asset.findOne({id: 1});
+  instance['auto'] = isAuto;
+  return res.render('model-info', {instance: instance});
 });
 
 
