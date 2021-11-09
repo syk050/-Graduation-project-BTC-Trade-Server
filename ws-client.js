@@ -33,9 +33,18 @@ app.use(bodyParser.urlencoded({extended:true})); // 3
 app.use('/info', require('./routes/info.route'));
 app.use('/trade', require('./routes/trade.route'));
 app.use('/auto', (req, res) => {
-  let instance = await Asset.findOne({id: 1});
-  instance['auto'] = isAuto;
-  return res.render('model-info', {instance: instance});
+  Asset.findOne({id: 1}).exec()
+  .then(instance => {
+    instance['auto'] = isAuto;
+    return instance;
+  })
+  .then(instance =>{
+    return res.render('model-info', {instance: instance});
+  })
+  .catch(err => {
+    console.error(err);
+    return;
+  });
 });
 
 
