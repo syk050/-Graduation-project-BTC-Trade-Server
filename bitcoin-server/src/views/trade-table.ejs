@@ -1,0 +1,22 @@
+<table>
+    <thead>
+        <tr>
+            <th>time</th>
+            <th>date</th>
+            <th>price</th>
+            <th>actual_amount</th>
+            <th>total_amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% list.forEach(function (item){ %>
+            <tr>
+                <td><%= item['time'] %></td>
+                <td><%= item['date'] %></td>
+                <td><%= item['price'] %></td>
+                <td><%= item['actual_amount'] %></td>
+                <td><%= item['total_amount'] %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>

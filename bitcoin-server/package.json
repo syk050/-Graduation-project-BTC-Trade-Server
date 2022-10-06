@@ -1,0 +1,40 @@
+{
+  "name": "bitcoin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "child-process": "^1.0.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "fs": "0.0.1-security",
+    "multer": "^1.4.2",
+    "mysql2": "^2.2.5",
+    "node-fetch": "^2.6.1",
+    "path": "^0.12.7",
+    "pm2": "^5.1.2",
+    "query-string": "^7.0.0",
+    "request": "^2.88.2",
+    "websocket": "^1.0.34",
+    "ws": "^8.2.2",
+    "xlsx": "^0.17.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syk050/bitcoin-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/syk050/bitcoin-server/issues"
+  },
+  "homepage": "https://github.com/syk050/bitcoin-server#readme",
+  "description": ""
+}

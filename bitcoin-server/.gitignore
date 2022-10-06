@@ -1,0 +1,6 @@
+
+*.csv
+node_modules/
+src/py
+*.out
+src/config.js

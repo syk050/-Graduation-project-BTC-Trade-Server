@@ -1,0 +1,24 @@
+<table>
+    <thead>
+        <tr>
+            <th>time</th>
+            <th>open</th>
+            <th>close</th>
+            <th>high</th>
+            <th>low</th>
+            <th>volume</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% list.forEach(function (item){ %>
+            <tr>
+                <td><%= item['time'] %></td>
+                <td><%= item['open'] %></td>
+                <td><%= item['close'] %></td>
+                <td><%= item['high'] %></td>
+                <td><%= item['low'] %></td>
+                <td><%= item['volume'] %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
